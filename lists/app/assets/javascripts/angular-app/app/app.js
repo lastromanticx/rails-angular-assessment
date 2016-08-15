@@ -32,6 +32,16 @@ angular
           }
         }
       })
+      .state('lists.new',{
+        url: '/lists/new',
+        controller: 'ListsCrudController as ctrl',
+        templateUrl: 'lists/_form.html',
+        resolve: {
+          list: function(ListService){
+            return {};
+          }
+        }
+      })
 
     ///////* SESSIONS *///////
 
