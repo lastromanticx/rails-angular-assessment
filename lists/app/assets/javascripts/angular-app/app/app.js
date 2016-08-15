@@ -83,6 +83,32 @@ angular
     $urlRouterProvider.otherwise('/lists');
   }])
 
+    ///////* USERS *///////
+      .state('users',{
+        url: '/accounts/myAccount',
+        templateUrl: 'users/index.html',
+        controller: 'UsersController as ctrl',
+        resolve: {
+          userInfo: function(SessionService,$state){
+            return SessionService.getUserInfo().then(function(resp){
+              if (resp.data.error){
+                if (!resp.data.error.match('Could not validate server session')){
+                  alert("An error occured: " + resp.data.error);
+
+                } else {
+                  $state.go('sessions.new');    
+                }
+
+                return {};
+
+              } else {
+                return resp.data;
+              }
+            });
+          }
+        }
+      })
+
   ///////* RUN *///////
 
   // http://stackoverflow.com/questions/27212182/angularjs-ui-router-how-to-redirect-to-login-page
