@@ -9,6 +9,10 @@ angular
         url: '',
         template: '<div ui-view></div>'
       })
+      .state('lists.index',{
+        url: '/lists',
+        templateUrl: 'lists/index.html'
+      })
 
     ///////* SESSIONS *///////
 
