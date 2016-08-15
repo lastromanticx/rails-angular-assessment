@@ -23,4 +23,8 @@ class List < ApplicationRecord
     update_permission(creator, "creator")
     save
   end
+
+  def collaborators
+    users.map{|user| if permission(user) == "creator" then user.email + " (creator)" else user.email end}.join(", ")
+  end
 end
