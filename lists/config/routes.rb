@@ -6,4 +6,15 @@ Rails.application.routes.draw do
   post 'sessions', to: 'sessions#create'
   get 'sessions/user', to: 'sessions#user'
   delete 'sessions', to: 'sessions#destroy'
+
+  resources :users, only: [:show]
+
+  resources :lists
+
+  get '/search', to: 'lists#search'
+  post '/search', to: 'lists#search'
+
+  resources :tasks
+
+  resources :tags
 end
