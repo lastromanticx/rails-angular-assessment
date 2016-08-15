@@ -27,4 +27,13 @@ class List < ApplicationRecord
   def collaborators
     users.map{|user| if permission(user) == "creator" then user.email + " (creator)" else user.email end}.join(", ")
   end
+
+  def self.search(query, list_id, user_id)
+    anchor = User.find_by(id: user_id)
+    
+    anchor = anchor.lists.find_by(id: list_id) if list_id.match(/\S/)
+    return {error: "List #{list_id} was not found."} if anchor.nil? 
+
+    anchor.tasks.joins(:tags).where("tasks.name LIKE '%#{query}%' OR tasks.description LIKE '%#{query}%' OR tags.name LIKE '%#{query}%'").distinct
+  end
 end
