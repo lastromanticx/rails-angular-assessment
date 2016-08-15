@@ -42,6 +42,30 @@ angular
           }
         }
       })
+      .state('lists.show',{
+        url: '/lists/:id',
+        controller: 'ListsShowController as ctrl',
+        templateUrl: 'lists/show.html',
+        resolve: {
+          list: function($stateParams,ListService,$state){
+            return ListService.getList($stateParams.id).then(function(resp){
+              if (resp.data.error){
+                if (!resp.data.error.match('Could not validate server session')){
+                  alert("An error occured: " + resp.data.error);
+
+                } else {
+                  $state.go('sessions.new');    
+                }            
+
+                return {};
+
+              } else {
+                return resp.data;
+              }
+            });
+          }
+        }
+      })
 
     ///////* SESSIONS *///////
 
