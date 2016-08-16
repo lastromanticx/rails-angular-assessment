@@ -1,5 +1,5 @@
 angular
-  .module('app',['ui.router','templates','ngMessages'])
+  .module('app',['ui.router','templates','ngMessages','ngAnimate'])
   .config(['$stateProvider', '$urlRouterProvider',function($stateProvider,$urlRouterProvider){
     $stateProvider
 

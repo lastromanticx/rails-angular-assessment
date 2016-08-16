@@ -16,6 +16,7 @@
 //= require angular-app/angular
 //= require angular-app/angular-ui-router
 //= require angular-app/angular-messages
+//= require angular-app/angular-animate
 //= require angular-rails-templates
 //= require_tree ./templates
 //= require angular-app/app/app

@@ -40,7 +40,7 @@
         <label>New Tag</label>
         <input type="text" class="form-control" ng-model="ctrl.task.tags_attributes['0'].name" />
       </div>
-      <input type="submit" id="submit" value="Update" class="btn btn-primary" />
+      <input type="submit" id="submit" value="Update" class="btn btn-primary" /> <span style="margin-left:20px;" class="alert alert-info" ng-show="ctrl.message">{{ ctrl.message }}</span>
     </form>
   </div>
 </div>

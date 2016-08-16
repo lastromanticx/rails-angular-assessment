@@ -1,4 +1,4 @@
-function TasksCrudController(task,TaskService,$state){
+function TasksCrudController(task,TaskService,$state,$timeout){
   var ctrl = this;
 
   ctrl.task = new Task(task);
@@ -40,7 +40,16 @@ function TasksCrudController(task,TaskService,$state){
         alert("An error occured: " + resp.data.error);
 
       } else {
-        $state.go('lists.task',{listId: resp.data.list_id, taskId: resp.data.id});
+        ctrl.message = "Task updated Successfully."
+        
+        $timeout(function(){
+          ctrl.message = "Returning to task...";
+        },2000);
+    
+        $timeout(function(){
+          ctrl.message = null;
+          $state.go('lists.task',{listId: resp.data.list_id, taskId: resp.data.id});
+        },3000);
       }
     });
   }
