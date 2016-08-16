@@ -66,6 +66,30 @@ angular
           }
         }
       })
+      .state('lists.edit',{
+        url: '/lists/:id/edit',
+        controller: 'ListsCrudController as ctrl',
+        templateUrl: 'lists/_form.html',
+        resolve: {
+          list: function($stateParams,ListService,$state){
+            return ListService.getList($stateParams.id).then(function(resp){
+              if (resp.data.error){
+                if (!resp.data.error.match('Could not validate server session')){
+                  alert("An error occured: " + resp.data.error);
+
+                } else {
+                  $state.go('sessions.new');    
+                }
+
+                return {};
+
+              } else {
+                return resp.data;
+              }
+            });
+          }
+        }
+      })
 
     ///////* TASKS *///////
 
@@ -123,22 +147,6 @@ angular
         }
       })
 
-    ///////* SESSIONS *///////
-
-      .state('sessions',{
-        abstract: true,
-        url: '',
-        template: '<div ui-view></div>'
-      })
-      .state('sessions.new',{
-        url: '/login',
-        templateUrl: 'sessions/new.html',
-        controller: 'SessionsController as ctrl'
-      });
-
-    $urlRouterProvider.otherwise('/lists');
-  }])
-
     ///////* USERS *///////
       .state('users',{
         url: '/accounts/myAccount',
@@ -164,6 +172,22 @@ angular
           }
         }
       })
+
+    ///////* SESSIONS *///////
+
+      .state('sessions',{
+        abstract: true,
+        url: '',
+        template: '<div ui-view></div>'
+      })
+      .state('sessions.new',{
+        url: '/login',
+        templateUrl: 'sessions/new.html',
+        controller: 'SessionsController as ctrl'
+      });
+
+    $urlRouterProvider.otherwise('/lists');
+  }])
 
   ///////* RUN *///////
 
