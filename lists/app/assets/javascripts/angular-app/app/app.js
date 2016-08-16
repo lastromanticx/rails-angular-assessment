@@ -93,6 +93,35 @@ angular
           }
         }
       })
+      .state('tasks',{
+        abstract: true,
+        url: '',
+        template: '<div ui-view></div>'
+      })
+      .state('tasks.edit',{
+        url: '/tasks/:id/edit',
+        controller: 'TasksCrudController as ctrl',
+        templateUrl: 'tasks/edit.html',
+        resolve: {
+          task: function($stateParams,TaskService,$state){
+            return TaskService.getTaskEdit($stateParams.id).then(function(resp){
+              if (resp.data.error){
+                if (!resp.data.error.match('Could not validate server session')){
+                  alert("An error occured: " + resp.data.error);
+
+                } else {
+                  $state.go('sessions.new');    
+                }
+
+                return {};
+
+              } else {
+                return resp.data;
+              }
+            });
+          }
+        }
+      })
 
     ///////* SESSIONS *///////
 
