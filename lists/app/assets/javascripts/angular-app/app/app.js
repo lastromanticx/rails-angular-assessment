@@ -193,7 +193,13 @@ angular
         url: '/login',
         templateUrl: 'sessions/new.html',
         controller: 'SessionsController as ctrl'
-      });
+      })
+
+  ///////* GAMES *///////
+      .state('game',{
+        url: '/games/game',
+        templateUrl: 'games/game.html'
+      })
 
     $urlRouterProvider.otherwise('/lists');
   }])
