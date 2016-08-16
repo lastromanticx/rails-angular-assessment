@@ -13,14 +13,16 @@ function ListsShowController(list,TaskService,$filter,$scope,$timeout){
   ctrl.refilterTasks();
 
   ctrl.formData = {task: {status: 'Incomplete', list_id: ctrl.list.id}};
-  ctrl.newTask = ctrl.formData.task;
+  ctrl.task = ctrl.formData.task;
 
   ctrl.addTask = function(){
-    ctrl.newTask.tag_ids = [];
+    ctrl.task.due_date = ctrl.task.dueDate;
 
-    for (let i in ctrl.newTask.tagIdsObj){
-      if (ctrl.newTask.tagIdsObj[i]) {
-        ctrl.newTask.tag_ids.push(parseInt(i));
+    ctrl.task.tag_ids = [];
+
+    for (let i in ctrl.task.tagIdsObj){
+      if (ctrl.task.tagIdsObj[i]) {
+        ctrl.task.tag_ids.push(parseInt(i));
       }
     }
 
@@ -32,12 +34,13 @@ function ListsShowController(list,TaskService,$filter,$scope,$timeout){
         ctrl.list.tasks.push(new Task(resp.data));
 
         // render new tag
-        if (ctrl.newTask.tags_attributes && ctrl.newTask.tags_attributes['0'].name.match(/\S/)){
+        if (ctrl.task.tags_attributes && ctrl.task.tags_attributes['0'].name.match(/\S/)){
           ctrl.allTags.push(resp.data.tags.splice(-1)[0]);
         }
 
         // clear form
-        ctrl.newTask = {};
+        ctrl.formData = {task: {status: 'Incomplete', list_id: ctrl.list.id}};
+        ctrl.task = ctrl.formData.task;
         $timeout(function() {
           $scope.form.$setPristine();
           $scope.form.$setUntouched();

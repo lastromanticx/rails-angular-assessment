@@ -1,7 +1,9 @@
 function AddTask(){
   return {
     restrict: 'E',
-    template:'test'
+    templateUrl: 'tasks/_form.html',
+    controller: 'ListsShowController',
+    controllerAs: 'ctrl'
   };
 }
 
