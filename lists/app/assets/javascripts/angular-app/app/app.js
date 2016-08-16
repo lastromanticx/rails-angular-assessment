@@ -12,6 +12,7 @@ angular
       .state('lists.index',{
         url: '/lists',
         templateUrl: 'lists/index.html',
+        controller: 'ListsIndexController as ctrl',
         resolve: {
           lists: function(ListService,$state){
             return ListService.getLists().then(function(resp){
@@ -145,6 +146,14 @@ angular
             });
           }
         }
+      })
+
+    ///////* SEARCH *///////
+
+      .state('search',{
+        url: '/search',
+        templateUrl: 'search/index.html',
+        controller: 'SearchController as ctrl'
       })
 
     ///////* USERS *///////

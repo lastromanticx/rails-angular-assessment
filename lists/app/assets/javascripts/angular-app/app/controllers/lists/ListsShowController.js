@@ -1,4 +1,4 @@
-function ListsShowController(list,TaskService,$filter){
+function ListsShowController(list,TaskService,$filter,$scope,$timeout){
   var ctrl = this;
 
   ctrl.list = new List(list);
@@ -35,6 +35,14 @@ function ListsShowController(list,TaskService,$filter){
         if (ctrl.newTask.tags_attributes && ctrl.newTask.tags_attributes['0'].name.match(/\S/)){
           ctrl.allTags.push(resp.data.tags.splice(-1)[0]);
         }
+
+        // clear form
+        ctrl.newTask = {};
+        $timeout(function() {
+          $scope.form.$setPristine();
+          $scope.form.$setUntouched();
+          $scope.form.$submitted = false;
+        });   
       }
     });
   }

@@ -32,7 +32,7 @@ class TasksController < ApplicationController
   end
 
   def update
-    task = Task.findi_by(id: task_params[:id])
+    task = Task.find_by(id: task_params[:id])
 
     if task.nil?
       render json: {error: "Could not find task with id #{task_params[:id]}."}, status: 200

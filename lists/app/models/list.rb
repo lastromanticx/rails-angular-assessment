@@ -34,6 +34,8 @@ class List < ApplicationRecord
     anchor = anchor.lists.find_by(id: list_id) if list_id.match(/\S/)
     return {error: "List #{list_id} was not found."} if anchor.nil? 
 
-    anchor.tasks.joins(:tags).where("tasks.name LIKE '%#{query}%' OR tasks.description LIKE '%#{query}%' OR tags.name LIKE '%#{query}%'").distinct
+    
+
+    anchor.tasks.joins(:tags).where("tasks.name LIKE '%#{ActiveRecord::Base.connection.quote_string(query)}%' OR tasks.description LIKE '%#{ActiveRecord::Base.connection.quote_string(query)}%' OR tags.name LIKE '%#{ActiveRecord::Base.connection.quote_string(query)}%'").distinct
   end
 end
