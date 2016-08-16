@@ -1,0 +1,39 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Add Task</h4>
+  </div>
+  <div class="panel-body">
+    <form ng-submit="ctrl.addTask()">
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" ng-model="ctrl.newTask.name" />
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea class="form-control" ng-model="ctrl.newTask.description"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Due Date</label>
+        <input type="text" class="form-control" ng-model="ctrl.newTask.due_date" placeholder="YYYY-MM-DD" />
+      </div>
+      <div class="form-group">
+        <label>Status</label>
+        <input type="text" class="form-control" ng-model="ctrl.newTask.status" />
+      </div>
+      <br>
+      <h5>Task Tags</h5>
+      <div ng-show="task.allTags.length === 0">
+        There are no tags.
+      </div>
+      <span ng-repeat="tag in ctrl.allTags">
+        <input type="checkbox" ng-model="ctrl.newTask.tagIdsObj[tag.id]" /> {{ tag.name }}&nbsp;
+      </span>
+      <br><br>
+      <div class="form-group">
+        <label>New Tag</label>
+        <input type="text" class="form-control" ng-model="ctrl.newTask.tags_attributes['0'].name" />
+      </div>
+      <input type="submit" id="submit" value="Submit" class="btn btn-primary" />
+    </form>
+  </div>
+</div>
