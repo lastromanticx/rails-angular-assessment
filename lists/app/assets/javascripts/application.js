@@ -24,6 +24,5 @@
 //= require_tree ./angular-app/app/controllers
 //= require_tree ./angular-app/app/directives
 //= require_tree ./angular-app/app/factories
-//= require_tree ./angular-app/app/helpers
 //= require_tree ./angular-app/app/models
 //= require_tree ./angular-app/app/services

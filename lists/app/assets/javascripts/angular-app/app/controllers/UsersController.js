@@ -1,4 +1,4 @@
-function UsersController(userInfo,SessionService,$state,$window){
+function UsersController(userInfo,SessionService,Auth,$state,$window){
   var ctrl = this;
 
   ctrl.user = new User(userInfo);
@@ -9,7 +9,7 @@ function UsersController(userInfo,SessionService,$state,$window){
         alert("An error occurred processing the request.\nSigning out locally.");
       }
 
-      Auth.unsetUser;
+      Auth.unsetUser();
       delete $window.localStorage.loggedIn;
 
       $state.go('sessions.new');
